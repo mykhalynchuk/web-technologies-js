@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 4: Інтернет-магазин</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Облік продуктів</h2>
+
+<div class="dashboard">
+  <div class="card">
+    <h3>1. Додати продукт</h3>
+    <input type="text" id="add-name" placeholder="Назва продукту">
+    <input type="number" id="add-price" placeholder="Ціна" min="1">
+    <input type="number" id="add-stock" placeholder="Кількість на складі" min="1">
+    <button id="btn-add">Додати у каталог</button>
+  </div>
+
+  <div class="card">
+    <h3>2-3. Керування продуктом</h3>
+    <input type="number" id="manage-id" placeholder="ID продукту">
+    <div class="split-inputs">
+      <input type="number" id="manage-price" placeholder="Нова ціна">
+      <input type="number" id="manage-stock" placeholder="Нова кількість">
+    </div>
+    <div class="btn-group">
+      <button id="btn-update" class="btn-warning">Оновити</button>
+      <button id="btn-delete" class="btn-danger">Видалити</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>4. Пошук</h3>
+    <input type="text" id="search-name" placeholder="Введіть назву">
+    <button id="btn-search">Знайти</button>
+  </div>
+
+  <div class="card">
+    <h3>5. Створити замовлення</h3>
+    <input type="text" id="order-id" placeholder="Унікальний ID замовлення (напр. ORD-1)">
+    <input type="number" id="order-prod-id" placeholder="ID продукту">
+    <input type="number" id="order-qty" placeholder="Кількість">
+    <button id="btn-order" class="btn-success">Оформити замовлення</button>
+  </div>
+</div>
+
+<div class="bottom-panel">
+  <div class="catalog-section">
+    <h3>Поточний Каталог</h3>
+    <ul id="catalog-list"></ul>
+  </div>
+
+  <div class="log-section">
+    <h3>Системні повідомлення & Історія (WeakMap)</h3>
+    <div id="system-logs"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

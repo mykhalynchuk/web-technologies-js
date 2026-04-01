@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1: Лампочка з таймером</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Модель управління лампочкою</h2>
+
+<div id="bulb" class="bulb standard"></div>
+
+<div class="controls">
+    <button id="toggleBtn">Включити</button>
+
+    <select id="typeSelect">
+        <option value="standard">Звичайна лампочка</option>
+        <option value="energy">Енергозберігаюча лампочка</option>
+        <option value="led">Світлодіодна (LED)</option>
+    </select>
+
+    <button id="brightnessBtn">Змінити яскравість</button>
+</div>
+
+<p id="statusText">Стан: Вимкнено</p>
+<p id="timerDisplay">Автовимкнення через: 05:00</p>
+
+<script src="script.js"></script>
+</body>
+</html>

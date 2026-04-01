@@ -122,7 +122,14 @@ function libraryManagement() {
     }
 
     function toggleBookAvailability(title, isBorrowed) {
-        let book = books.find(b => b.title === title);
+        books = books.map(b => {
+            if(b.title === title) {
+                b.isAvailable = isBorrowed;
+                return b
+            }
+            return b;
+        }) ;
+
     }
 
     function sortedBooksByPages() {

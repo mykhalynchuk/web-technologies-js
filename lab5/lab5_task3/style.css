@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 900px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #007bff;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.clock {
+    font-size: 48px;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    background: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.colon {
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+input[type="datetime-local"],
+input[type="month"],
+input[type="date"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.result {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px dashed #ccc;
+}
+
+.result.highlight {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 10px 0;
+}

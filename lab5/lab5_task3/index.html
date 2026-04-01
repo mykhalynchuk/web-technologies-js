@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 3: Дата та час</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Робота з Датою та Часом</h2>
+
+<div class="dashboard">
+
+  <div class="card">
+    <h3>Цифровий годинник</h3>
+    <div class="clock" id="digital-clock">
+      <span id="hour">00</span><span class="colon">:</span><span id="minute">00</span><span class="colon">:</span><span id="second">00</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Таймер зворотного відліку</h3>
+    <p>Виберіть дату та час завершення:</p>
+    <input type="datetime-local" id="countdown-input">
+    <button id="btn-start-countdown">Запустити таймер</button>
+    <div class="result" id="countdown-result">Очікування...</div>
+  </div>
+
+  <div class="card">
+    <h3>Календар та День Народження</h3>
+
+    <div class="input-group">
+      <label for="month-input">Перегляд місяця та року:</label>
+      <input type="month" id="month-input">
+    </div>
+
+    <hr>
+
+    <div class="input-group">
+      <label for="bday-input">Вкажіть свій день народження:</label>
+      <input type="date" id="bday-input">
+      <button id="btn-calc-bday">Порахувати час</button>
+    </div>
+
+    <div class="result highlight" id="bday-result">Очікування дати...</div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
