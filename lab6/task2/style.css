@@ -1,0 +1,214 @@
+:root {
+    --primary: #10B981;
+    --primary-hover: #059669;
+    --danger: #EF4444;
+    --danger-hover: #DC2626;
+    --edit: #3B82F6;
+    --edit-hover: #2563EB;
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #9CA3AF;
+    --border: #E5E7EB;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.todo-container {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.todo-header {
+    background-color: #f8fafc;
+    padding: 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.todo-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--text-main);
+    text-align: center;
+}
+
+.todo-form {
+    display: flex;
+    gap: 10px;
+}
+
+.todo-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.todo-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+    color: white;
+}
+
+.btn:active { transform: scale(0.95); }
+.btn-add { background-color: var(--primary); }
+.btn-add:hover { background-color: var(--primary-hover); }
+.btn-danger { background-color: var(--danger); padding: 8px 12px; font-size: 0.85rem;}
+.btn-danger:hover { background-color: var(--danger-hover); }
+.btn-edit { background-color: var(--edit); padding: 8px 12px; font-size: 0.85rem;}
+.btn-edit:hover { background-color: var(--edit-hover); }
+.btn-save { background-color: var(--primary); padding: 8px 12px; font-size: 0.85rem;}
+
+.todo-controls {
+    padding: 15px 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    background-color: #fcfcfc;
+    border-bottom: 1px solid var(--border);
+}
+
+.sort-select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 20px 30px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+    border-radius: 8px;
+    gap: 15px;
+    transition: box-shadow 0.2s, opacity 0.3s;
+    animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.todo-item:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.todo-item.completed {
+    background-color: #f9fafb;
+}
+
+.todo-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+/* Анімація для видалення */
+.todo-item.slide-out {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-text {
+    font-size: 1.1rem;
+    cursor: pointer;
+    word-break: break-word;
+}
+
+.task-dates {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Редагування інлайн */
+.edit-input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--edit);
+    border-radius: 6px;
+    font-size: 1.1rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Keyframes для анімацій */
+@keyframes slideIn {
+    0% { opacity: 0; transform: translateY(-20px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideOut {
+    0% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(50px); }
+}
+
+/* Адаптивність */
+@media (max-width: 480px) {
+    .todo-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+}
