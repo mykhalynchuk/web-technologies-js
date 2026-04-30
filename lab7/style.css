@@ -1,0 +1,292 @@
+body {
+  background: #000;
+  font-family: "PressStart2P";
+}
+
+.game-menu {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  width: 800px;
+  height: 480px;
+  background: url(img/main-background.png) no-repeat;
+}
+
+.game-menu__title {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 70px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.button {
+  position: fixed;
+  left: 50%;
+  top: 70%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-family: "PressStart2P";
+  font-size: 20px;
+  text-transform: uppercase;
+  background: transparent;
+  color: #e20f0f;
+  cursor: pointer;
+}
+
+.button-restart{
+  display: none;
+  top: 90%;
+  z-index: 1001;
+}
+
+.button-next-level {
+  display: none;
+  top: 90%;
+  z-index: 1001;
+}
+
+.button:hover {
+  color: #000;
+}
+
+.button:active {
+  color: #000;
+}
+
+.button-start-endless{
+  margin: 30px 0;
+}
+
+.wrapper {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 55%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  height: 750px;
+  width: 900px;
+  box-sizing: border-box;
+}
+
+.game-screen {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  box-sizing: border-box;
+  width: 800px;
+  height: 480px;
+  overflow: hidden;
+  background: url(img/bg.png) no-repeat;
+  background-size: cover;
+}
+
+#gunmanCanvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 900;
+}
+
+.game-screen--death {
+  animation: 4s player-death linear;
+}
+
+@keyframes player-death {
+  0% {
+    box-shadow: inset 0 0 400px rgba(215, 35, 0, 0.5);
+  }
+  20% {
+    box-shadow: inset 0 0 300px rgba(215, 35, 0, 0.5);
+  }
+  40% {
+    box-shadow: inset 0 0 200px rgba(215, 35, 0, 0.5);
+  }
+  100% {
+    box-shadow: inset 0 0 100px rgba(215, 35, 0, 0.5);
+  }
+}
+
+.message {
+  color: #fff;
+  position: absolute;
+  left: 57%;
+  top: 36%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 1;
+}
+
+.message--fire {
+  width: 116px;
+  height: 68px;
+  background: url(img/fire-right.png) no-repeat;
+  left: 60%;
+}
+
+.message--dead,
+.message--win {
+  left: 50%;
+  top: 30%;
+  font-family: "PressStart2P";
+  font-size: 30px;
+  color: #fff;
+}
+
+.white-line {
+  position: absolute;
+  left: 50px;
+  top: 10%;
+  z-index: 700;
+  width: 800px;
+  border-bottom: 2px solid #fff;
+}
+
+.game-panels {
+  display: none;
+}
+
+.players-panel,
+.time-panel,
+.score-panel {
+  padding: 10px;
+  font-family: "PressStart2P";
+  font-size: 25px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #80d010;
+}
+
+.records .score-panel{
+  color: #E0E0E0;
+  padding: 0;
+}
+
+.time-panel {
+  position: absolute;
+  left: 70%;
+  top: 2px;
+  z-index: 700;
+}
+
+.time-panel__gunman,
+.time-panel__you {
+  font-family: "Digital-7";
+  font-size: 56px;
+}
+
+.time-panel__you {
+  margin-bottom: 5px;
+}
+
+.players-panel {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  box-sizing: border-box;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 700;
+}
+
+.players-panel__you,
+.players-panel__gunman {
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #80d010;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.players-panel__you {
+  margin-bottom: 10px;
+}
+
+.score-panel {
+  text-align: center;
+}
+
+.score-panel__score{
+  position: absolute;
+  left: 25%;
+  top: 85%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 700;
+  box-sizing: border-box;
+}
+
+.win-screen .score-panel{
+  position: relative;
+}
+
+.win-screen .score-panel .score-panel__final-score{
+  color: #E0E0E0;
+}
+
+.records{
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+  left: 0;
+  bottom: 0;
+}
+
+.score-panel__level {
+  position: absolute;
+  left: 70%;
+  top: 85%;
+  z-index: 700;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  box-sizing: border-box;
+}
+
+.win-screen {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  box-sizing: border-box;
+  width: 800px;
+  height: 480px;
+  background: url(img/win-bg.png) no-repeat;
+}
+
+.win-screen__title {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 50px;
+  line-height: 70px;
+  text-transform: uppercase;
+  text-align: center;
+}
