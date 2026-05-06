@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Pair Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+  <header>
+    <h1>Memory Pair Game</h1>
+  </header>
+
+  <main>
+    <!-- Секція налаштувань -->
+    <section id="settings-panel" class="panel">
+      <h2>Налаштування гри</h2>
+
+      <div class="form-group">
+        <label for="players-mode">Кількість гравців:</label>
+        <select id="players-mode">
+          <option value="1">1 Гравець</option>
+          <option value="2">2 Гравці</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="p1-name-group">
+        <label for="p1-name">Ім'я Гравця 1:</label>
+        <input type="text" id="p1-name" value="Player 1">
+      </div>
+
+      <div class="form-group hidden" id="p2-name-group">
+        <label for="p2-name">Ім'я Гравця 2:</label>
+        <input type="text" id="p2-name" value="Player 2">
+      </div>
+
+      <div class="form-group">
+        <label for="grid-size">Розмір поля:</label>
+        <select id="grid-size">
+          <option value="16">4 x 4</option>
+          <option value="20">4 x 5</option>
+          <option value="36">6 x 6</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="difficulty">Складність:</label>
+        <select id="difficulty">
+          <option value="easy">Easy (3 хв)</option>
+          <option value="normal">Normal (2 хв)</option>
+          <option value="hard">Hard (1 хв)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="rounds-count">Кількість раундів:</label>
+        <input type="number" id="rounds-count" value="1" min="1" max="10">
+      </div>
+
+      <div class="buttons">
+        <button id="btn-reset-settings" class="btn secondary">Скинути налаштування</button>
+        <button id="btn-start" class="btn primary">Розпочати гру</button>
+      </div>
+    </section>
+
+
+    <section id="game-panel" class="panel hidden">
+      <div class="game-info">
+        <div class="info-item">Раунд: <span id="ui-round">1</span>/<span id="ui-total-rounds">1</span></div>
+        <div class="info-item timer">Час: <span id="ui-timer">03:00</span></div>
+        <button id="btn-restart" class="btn secondary small">Рестарт</button>
+      </div>
+
+      <div class="players-info" id="players-info">
+
+      </div>
+
+      <div id="game-board" class="board"></div>
+    </section>
+
+
+    <div id="results-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="modal-title">Результати</h2>
+        <div id="modal-body"></div>
+        <button id="btn-next-round" class="btn primary">Наступний раунд</button>
+        <button id="btn-new-game" class="btn secondary">Нова гра</button>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

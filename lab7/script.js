@@ -39,26 +39,26 @@ let enemyType = 0;
 let endlessScore = 0;
 let campaignScore = 0;
 
-// Gunman animation states
+
 let gunmanState = 'idle';
 let gunmanX = 800;
-let gunmanY = 224; // 480 (canvas height) - 256 (gunman height)
-let gunmanWidth = 128; // 32 * 4 (scaled)
-let gunmanHeight = 256; // 64 * 4 (scaled)
+let gunmanY = 224;
+let gunmanWidth = 128;
+let gunmanHeight = 256;
 let currentFrame = 0;
 let frameCount = 0;
-let animationSpeed = 10; // Frames per second (adjustable)
-let walkBackStartTime = 0; // Track when walkBack starts
-let walkStartTime = 0; // Track when walk starts
+let animationSpeed = 10;
+let walkBackStartTime = 0;
+let walkStartTime = 0;
 
-// Movement speeds
-const walkDistance = 800 - 340; // 460px
-const walkDuration = 5000; // 5 seconds
-const walkSpeed = walkDistance / walkDuration; // 92px/s
-const walkBackDistance = 340; // 340px
-const walkBackDuration = walkBackDistance / walkSpeed; // ~3.7 seconds
 
-// Sprite sheet data
+const walkDistance = 800 - 340;
+const walkDuration = 5000;
+const walkSpeed = walkDistance / walkDuration;
+const walkBackDistance = 340;
+const walkBackDuration = walkBackDistance / walkSpeed;
+
+
 const spriteSheet = new Image();
 spriteSheet.src = 'img/gunman.png';
 spriteSheet.onload = () => {
@@ -69,9 +69,9 @@ spriteSheet.onerror = () => {
     console.error('Failed to load gunman sprite');
 };
 
-// Animation frames for each state
+
 const enemies = [
-    // enemy 1
+
     {
         walk: [0, 33, 66],
         standing: [100],
@@ -88,7 +88,7 @@ const enemies = [
         height: 64,
         coordinateY: 0
     },
-    // enemy 2
+
     {
         walk: [0, 34, 68],
         standing: [208],
@@ -105,7 +105,7 @@ const enemies = [
         height: 72,
         coordinateY: 68
     },
-    // enemy 3
+
     {
         walk: [0, 28, 56],
         standing: [174],
@@ -122,7 +122,7 @@ const enemies = [
         height: 80,
         coordinateY: 144
     },
-    // enemy 4
+
     {
         walk: [0, 34, 68],
         standing: [201],
@@ -139,7 +139,7 @@ const enemies = [
         height: 64,
         coordinateY: 228
     },
-    // enemy 5
+
     {
         walk: [0, 34, 68],
         standing: [195],
@@ -158,7 +158,7 @@ const enemies = [
     }
 ];
 
-// Sounds
+
 const sounds = {
     intro: new Audio("sfx/intro.m4a"),
     win: new Audio("sfx/win.m4a"),
@@ -170,7 +170,7 @@ const sounds = {
     wait: new Audio("sfx/wait.m4a")
 }
 
-// Start game
+
 function startGame() {
     if (!spriteLoaded) {
         console.warn('Sprite not loaded yet, waiting...');
@@ -186,7 +186,7 @@ function startGame() {
     countdownTime = 3 + Math.random() * 2;
     gunmanState = 'walk';
     gunmanX = 800;
-    walkStartTime = performance.now(); // Track start time of walk
+    walkStartTime = performance.now();
     currentFrame = 0;
     frameCount = 0;
     scoreNum.textContent = score;
@@ -197,14 +197,13 @@ function startGame() {
     restartButton.style.display = 'none';
     nextLevelButton.style.display = 'none';
     timerStopped = false;
-    hasWonOnce = false; // Reset on game start
-    playerShot = false; // Reset shot state
-    enemyShot = false; // Reset shot state
+    hasWonOnce = false;
+    playerShot = false;
+    enemyShot = false;
 }
 
-// Restart game
 function restartGame() {
-    // Clear any pending timeouts
+
     if (walkBackTimeout) {
         clearTimeout(walkBackTimeout);
         walkBackTimeout = null;
@@ -222,7 +221,7 @@ function restartGame() {
     wrapper.style.display = 'none';
     gamePanels.style.display = 'none';
     gameScreen.style.display = 'none';
-    winScreen.style.display = 'none'; // Hide win screen
+    winScreen.style.display = 'none';
     gunmanState = 'idle';
     gunmanX = 800;
     currentFrame = 0;
@@ -231,18 +230,18 @@ function restartGame() {
     message.textContent = '';
     restartButton.style.display = 'none';
     nextLevelButton.style.display = 'none';
-    backToMenuButton.style.display = 'none'; // Hide back to menu button
+    backToMenuButton.style.display = 'none';
     gameMenu.style.display = 'block';
     timerStopped = false;
     hasWonOnce = false;
-    playerShot = false; // Reset shot state
-    enemyShot = false; // Reset shot state
-    walkBackStartTime = 0; // Reset walk back time
-    walkStartTime = 0; // Reset walk start time
+    playerShot = false;
+    enemyShot = false;
+    walkBackStartTime = 0;
+    walkStartTime = 0;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-// Next level
+
 function nextLevel() {
     level++;
     if (level > 5 && !isEndless) {
@@ -256,7 +255,7 @@ function nextLevel() {
         campaignScore = score > campaignScore ? score : campaignScore;
         resultScorePanel.textContent = "Your score: " + score;
         resultScorePanel.innerHTML += newRecord ? "<br> New Record!!!" : "";
-        backToMenuButton.style.display = 'block'; // Show back to menu button
+        backToMenuButton.style.display = 'block';
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         return;
     }
@@ -268,11 +267,11 @@ function nextLevel() {
     enemyShot = false;
     gunmanState = 'walk';
     gunmanX = 800;
-    walkStartTime = performance.now(); // Reset walk start time
+    walkStartTime = performance.now();
     currentFrame = 0;
     frameCount = 0;
-    message.className = 'message'; // Reset message class
-    message.textContent = ''; // Clear message text
+    message.className = 'message';
+    message.textContent = '';
     restartButton.style.display = 'none';
     nextLevelButton.style.display = 'none';
     timeYou.textContent = '0.00';
@@ -280,7 +279,7 @@ function nextLevel() {
     timerStopped = false;
 }
 
-// Move gunman
+
 function moveGunman() {
     if (gameState === 'countdown') {
         gunmanState = 'standing';
@@ -291,7 +290,7 @@ function moveGunman() {
     }
 }
 
-// Prepare for duel
+
 function prepareForDuel() {
     if (gameState === 'countdown') {
         gameState = 'duel';
@@ -301,7 +300,7 @@ function prepareForDuel() {
         message.className = 'message message--fire';
         startTime = performance.now();
         sounds.wait.play();
-        // Adjust gunman reaction time based on level
+
         let minTime, maxTime;
         minTime = 1000 / level;
         maxTime = 2000 / level;
@@ -311,7 +310,7 @@ function prepareForDuel() {
     }
 }
 
-// Time counter
+
 function timeCounter() {
     if (gameState === 'duel' && !timerStopped) {
         const currentTime = performance.now();
@@ -325,7 +324,7 @@ function timeCounter() {
     }
 }
 
-// Gunman shoots player
+
 function gunmanShootsPlayer() {
     if (gameState === 'duel' && !playerShot) {
         shut();
@@ -352,11 +351,11 @@ function gunmanShootsPlayer() {
         walkBackTimeout = setTimeout(() => {
             gunmanState = 'walk';
             walkBackStartTime = performance.now();
-        }, 1000); // Start walking left after 1 second
+        }, 1000);
     }
 }
 
-// Player shoots gunman
+
 function playerShootsGunman(e) {
     if (gameState !== 'duel' || playerShot) return;
     sounds.shot.play();
@@ -364,7 +363,7 @@ function playerShootsGunman(e) {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    // Check if click is within gunman bounds
+
     if (
         mouseX >= gunmanX &&
         mouseX <= gunmanX + gunmanWidth &&
@@ -380,7 +379,7 @@ function playerShootsGunman(e) {
             gunmanState = 'death';
             currentFrame = 0;
             frameCount = 0;
-            // Show "You Win!" only on the first victory
+
             if (!hasWonOnce) {
                 message.className = 'message message--win';
                 message.textContent = 'You Win!';
@@ -394,40 +393,39 @@ function playerShootsGunman(e) {
     }
 }
 
-// Draw gunman animation
+
 function drawGunman() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (gunmanState === 'idle') return;
     let enemy = enemies[isEndless ? enemyType : (level-1) % enemies.length];
     const frames = enemy[gunmanState];
     const frame = frames[currentFrame];
 
-    // Draw the current frame
+
     ctx.drawImage(
-        spriteSheet, // Image
-        frame, enemy["coordinateY"], // Source x, y
-        enemy["width"][gunmanState], enemy["height"], // Source width, height
-        gunmanX, 250 - enemy["height"], // Destination x, y
-        4 * enemy["width"][gunmanState], 4 * enemy["height"] // Destination width, height
+        spriteSheet,
+        frame, enemy["coordinateY"],
+        enemy["width"][gunmanState], enemy["height"],
+        gunmanX, 250 - enemy["height"],
+        4 * enemy["width"][gunmanState], 4 * enemy["height"]
     );
 
-    // Update frame
+
     frameCount++;
     if (frameCount >= 60 / animationSpeed) {
         frameCount = 0;
         currentFrame++;
         if (currentFrame >= frames.length) {
             if (gunmanState === 'death' || gunmanState === 'shooting') {
-                currentFrame = frames.length - 1; // Stay on last frame
+                currentFrame = frames.length - 1;
             } else {
-                currentFrame = 0; // Loop animation
+                currentFrame = 0;
             }
         }
     }
 }
 
-// Shut sounds
 function shut(){
     Object.values(sounds).forEach(function(sound){
         sound.pause();
@@ -435,28 +433,28 @@ function shut(){
     });
 }
 
-// Game loop
+
 function gameLoop() {
     if (gameState === 'countdown') {
         countdownTime -= 1 / 60;
-        // Smooth movement during "walk" (from right to left)
+
         if (gunmanState === 'walk') {
             sounds.intro.play();
             const elapsed = performance.now() - walkStartTime;
             const progress = Math.min(elapsed / walkDuration, 1);
-            gunmanX = 800 - (800 - 340) * progress; // Move from 800 to 340
+            gunmanX = 800 - (800 - 340) * progress;
             if (progress >= 1) {
-                moveGunman(); // Call moveGunman when walk is complete
+                moveGunman();
             }
         }
     } else if (gameState === 'duel' || gameState === 'result') {
         timeCounter();
         if (gunmanState === 'walk') {
             const elapsed = performance.now() - walkBackStartTime;
-            const progress = Math.min(elapsed / walkBackDuration, 1); // Adjusted duration for consistent speed
-            gunmanX = 340 - (340) * progress; // Move from 340 to 0
+            const progress = Math.min(elapsed / walkBackDuration, 1);
+            gunmanX = 340 - (340) * progress;
             if (progress === 1) {
-                gunmanState = 'idle'; // Stop at the left side
+                gunmanState = 'idle';
             }
         }
     }
@@ -469,12 +467,12 @@ function startEndless(){
     startGame();
 }
 
-// Event listeners
+
 startButton.addEventListener('click', startGame);
 restartButton.addEventListener('click', restartGame);
 nextLevelButton.addEventListener('click', nextLevel);
 backToMenuButton.addEventListener('click', restartGame);
 canvas.addEventListener('click', playerShootsGunman);
 endlessButton.addEventListener('click', startEndless);
-// Start game loop
+
 gameLoop();
