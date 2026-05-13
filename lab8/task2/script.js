@@ -3,14 +3,14 @@ class Carousel {
         this.container = document.getElementById(elementId);
         if (!this.container) throw new Error(`Елемент з id ${elementId} не знайдено`);
 
-        // Дефолтні параметри зливаються з тими, що передані користувачем
+
         this.config = {
-            items: [], // Масив об'єктів для відображення
-            speed: 400, // Швидкість анімації між слайдами (мс)
-            autoplay: true, // Автопрокрутка
-            autoplayInterval: 3000, // Час між слайдами при автопрокрутці (мс)
-            showArrows: true, // Відображення стрілок
-            showPagination: true, // Відображення крапочок
+            items: [],
+            speed: 400,
+            autoplay: true,
+            autoplayInterval: 3000,
+            showArrows: true,
+            showPagination: true,
             ...config
         };
 
@@ -31,7 +31,6 @@ class Carousel {
         this.track = this.container.querySelector('.slider-track');
         this.dots = this.container.querySelectorAll('.slider-dot');
 
-        // Встановлення швидкості анімації з конфігурації
         this.track.style.transition = `transform ${this.config.speed}ms ease-in-out`;
 
         this.bindEvents();
@@ -47,7 +46,6 @@ class Carousel {
 
         let html = '<div class="slider-track">';
 
-        // Генерація слайдів на основі масиву конфігурації
         this.config.items.forEach(item => {
             if (item.type === 'image') {
                 html += `<div class="slide"><img src="${item.src}" alt="slide"></div>`;
@@ -57,7 +55,6 @@ class Carousel {
         });
         html += '</div>';
 
-        // Генерація стрілок (SVG іконки)
         if (this.config.showArrows && this.totalItems > 1) {
             html += `
         <button class="slider-arrow prev" aria-label="Previous">
@@ -69,7 +66,6 @@ class Carousel {
       `;
         }
 
-        // Генерація точок пагінації
         if (this.config.showPagination && this.totalItems > 1) {
             html += '<div class="slider-dots">';
             for (let i = 0; i < this.totalItems; i++) {
@@ -82,13 +78,11 @@ class Carousel {
     }
 
     bindEvents() {
-        // Події для стрілок
         if (this.config.showArrows && this.totalItems > 1) {
             this.container.querySelector('.prev').addEventListener('click', () => this.prev());
             this.container.querySelector('.next').addEventListener('click', () => this.next());
         }
 
-        // Події для пагінації (Делегування подій)
         if (this.config.showPagination && this.totalItems > 1) {
             this.container.querySelector('.slider-dots').addEventListener('click', (e) => {
                 if (e.target.classList.contains('slider-dot')) {
@@ -98,30 +92,27 @@ class Carousel {
             });
         }
 
-        // Keyboard events: зміна слайду стрілками ← та →
         this.container.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
                 this.prev();
-                e.preventDefault(); // Запобігає прокрутці всієї сторінки
+                e.preventDefault();
             } else if (e.key === 'ArrowRight') {
                 this.next();
                 e.preventDefault();
             }
         });
 
-        // Autoplay пауза при наведенні курсора
         if (this.config.autoplay) {
             this.container.addEventListener('mouseenter', () => this.stopAutoplay());
             this.container.addEventListener('mouseleave', () => this.startAutoplay());
 
-            // Також зупиняємо, якщо користувач клацнув на слайдер (фокус)
             this.container.addEventListener('focusin', () => this.stopAutoplay());
             this.container.addEventListener('focusout', () => this.startAutoplay());
         }
     }
 
     goTo(index) {
-        // Continuous loop mode logic
+
         if (index < 0) {
             this.currentIndex = this.totalItems - 1;
         } else if (index >= this.totalItems) {
@@ -142,11 +133,9 @@ class Carousel {
     }
 
     updateSlider() {
-        // Плавне переміщення за допомогою transform: translateX
         const offset = -this.currentIndex * 100;
         this.track.style.transform = `translateX(${offset}%)`;
 
-        // Оновлення активної точки пагінації
         if (this.config.showPagination) {
             this.dots.forEach(dot => dot.classList.remove('active'));
             if (this.dots[this.currentIndex]) {
@@ -156,7 +145,7 @@ class Carousel {
     }
 
     startAutoplay() {
-        this.stopAutoplay(); // Очищаємо старий інтервал перед створенням нового
+        this.stopAutoplay();
         this.autoplayTimer = setInterval(() => {
             this.next();
         }, this.config.autoplayInterval);
@@ -170,8 +159,6 @@ class Carousel {
     }
 }
 
-// === ІНІЦІАЛІЗАЦІЯ ===
-// Створюємо масив контенту: можна міксувати текст і зображення
 const sliderData = [
     { type: 'text', content: 'Slide 1' },
     { type: 'text', content: 'Slide 2' },
@@ -185,12 +172,11 @@ const sliderData = [
     { type: 'image', src: 'https://images.unsplash.com/photo-1506744626753-1fa28f6f53cb?w=800&auto=format&fit=crop', alt: 'Природа' }
 ];
 
-// Ініціалізація з параметрами конфігурації
 const myCarousel = new Carousel('my-carousel', {
-    items: sliderData,        // Масив контенту
-    speed: 500,               // Швидкість анімації (ms)
-    autoplay: true,           // Автопрокручування увімкнено
-    autoplayInterval: 2500,   // Інтервал між змінами слайдів
-    showArrows: true,         // Показувати стрілки
-    showPagination: true      // Показувати точки (pagination)
+    items: sliderData,
+    speed: 500,
+    autoplay: true,
+    autoplayInterval: 2500,
+    showArrows: true,
+    showPagination: true
 });

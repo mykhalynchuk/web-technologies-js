@@ -15,7 +15,7 @@ const PURE = {
             }));
     },
 
-    // Визначення часу в секундах залежно від складності
+
     getTimeLimit: (difficulty) => {
         switch(difficulty) {
             case 'hard': return 60;
@@ -24,25 +24,20 @@ const PURE = {
         }
     },
 
-    // Форматування часу (наприклад, 125 -> "02:05")
     formatTime: (seconds) => {
         const m = Math.floor(seconds / 60).toString().padStart(2, '0');
         const s = (seconds % 60).toString().padStart(2, '0');
         return `${m}:${s}`;
     },
 
-    // Оновлення масиву карток (повертає новий масив, не мутуючи старий)
     updateCardState: (deck, idsToUpdate, changes) => {
         return deck.map(card =>
             idsToUpdate.includes(card.id) ? { ...card, ...changes } : card
         );
     },
 
-    // Перевірка, чи всі картки знайдені
     isRoundComplete: (deck) => deck.every(card => card.isMatched)
 };
-
-// --- СТАН ДОДАТКУ (State) ---
 
 const state = {
     settings: { mode: '1', p1Name: 'Player 1', p2Name: 'Player 2', gridSize: 16, difficulty: 'easy', totalRounds: 1 },
@@ -54,10 +49,8 @@ const state = {
     timeRemaining: 0,
     timerId: null,
     isLocked: false,
-    stats: [] // Історія раундів
+    stats: []
 };
-
-// --- РОБОТА З DOM ---
 
 const DOM = {
     settingsPanel: document.getElementById('settings-panel'),
@@ -74,7 +67,6 @@ const DOM = {
     btnNewGame: document.getElementById('btn-new-game')
 };
 
-// Ініціалізація подій
 const initEvents = () => {
     document.getElementById('players-mode').addEventListener('change', (e) => {
         document.getElementById('p2-name-group').classList.toggle('hidden', e.target.value === '1');
@@ -136,7 +128,6 @@ const startRound = (roundNum) => {
         state.players.push({ name: state.settings.p2Name, moves: 0, matches: 0 });
     }
 
-    // Налаштування Grid
     const cols = state.settings.gridSize === 36 ? 6 : (state.settings.gridSize === 20 ? 5 : 4);
     DOM.board.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
@@ -190,7 +181,6 @@ const handleCardClick = (id) => {
     const card = state.deck.find(c => c.id === id);
     if (card.isFlipped || card.isMatched) return;
 
-    // Перевертаємо картку
     state.deck = PURE.updateCardState(state.deck, [id], { isFlipped: true });
     state.flippedIds.push(id);
     renderBoard();
@@ -204,7 +194,6 @@ const handleCardClick = (id) => {
         const c2 = state.deck.find(c => c.id === id2);
 
         if (c1.symbol === c2.symbol) {
-            // Співпадіння
             setTimeout(() => {
                 state.deck = PURE.updateCardState(state.deck, [id1, id2], { isMatched: true });
                 state.players[state.currentPlayerIndex].matches++;
@@ -219,12 +208,10 @@ const handleCardClick = (id) => {
                 }
             }, 500);
         } else {
-            // Немає співпадіння
             setTimeout(() => {
                 state.deck = PURE.updateCardState(state.deck, [id1, id2], { isFlipped: false });
                 state.flippedIds = [];
 
-                // Зміна гравця (якщо 2 гравці)
                 if (state.players.length > 1) {
                     state.currentPlayerIndex = state.currentPlayerIndex === 0 ? 1 : 0;
                 }
@@ -241,12 +228,11 @@ const handleCardClick = (id) => {
 const endRound = (reason) => {
     const timeTaken = PURE.getTimeLimit(state.settings.difficulty) - state.timeRemaining;
 
-    // Збереження статистики
     state.stats.push({
         round: state.round,
         reason,
         timeTaken,
-        players: JSON.parse(JSON.stringify(state.players)) // Глибока копія
+        players: JSON.parse(JSON.stringify(state.players))
     });
 
     showModal(reason);

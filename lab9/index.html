@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лабораторна робота №9 - Форми</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('signup')">Реєстрація</button>
+    <button class="tab-btn" onclick="switchTab('login')">Авторизація</button>
+  </div>
+
+  <form id="signup-form" class="form-container active">
+    <h2>Створити акаунт</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" placeholder="Mark">
+        <small class="error-msg">Error message</small>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" placeholder="Otto">
+        <small class="error-msg">Error message</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" placeholder="example@mail.com">
+      <small class="error-msg">Error message</small>
+    </div>
+
+    <div class="form-group password-group">
+      <label for="regPassword">Password</label>
+      <div class="input-wrapper">
+        <input type="password" id="regPassword" placeholder="Введіть пароль">
+        <button type="button" class="toggle-password" onclick="togglePassword('regPassword')">👁️</button>
+      </div>
+      <small class="error-msg">Error message</small>
+    </div>
+
+    <div class="form-group password-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <div class="input-wrapper">
+        <input type="password" id="confirmPassword" placeholder="Повторіть пароль">
+        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</button>
+      </div>
+      <small class="error-msg">Error message</small>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" placeholder="+380...">
+        <small class="error-msg">Error message</small>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date Birth</label>
+        <input type="date" id="dob">
+        <small class="error-msg">Error message</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Sex</label>
+      <div class="radio-group">
+        <input type="radio" id="male" name="sex" value="male"> <label for="male">Male</label>
+        <input type="radio" id="female" name="sex" value="female"> <label for="female">Female</label>
+      </div>
+      <small class="error-msg" id="sexError">Оберіть стать</small>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select id="country">
+          <option value="">Оберіть країну...</option>
+          <option value="Ukraine">Україна</option>
+          <option value="Poland">Польща</option>
+        </select>
+        <small class="error-msg">Error message</small>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <select id="city" disabled>
+          <option value="">Спочатку оберіть країну</option>
+        </select>
+        <small class="error-msg">Error message</small>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Зареєструватися</button>
+  </form>
+
+  <form id="login-form" class="form-container">
+    <h2>Увійти</h2>
+
+    <div class="form-group">
+      <label for="loginUsername">Username</label>
+      <input type="text" id="loginUsername" placeholder="Введіть юзернейм">
+      <small class="error-msg">Error message</small>
+    </div>
+
+    <div class="form-group password-group">
+      <label for="loginPassword">Password</label>
+      <div class="input-wrapper">
+        <input type="password" id="loginPassword" placeholder="Введіть пароль">
+        <button type="button" class="toggle-password" onclick="togglePassword('loginPassword')">👁️</button>
+      </div>
+      <small class="error-msg">Error message</small>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <input type="checkbox" id="rememberMe">
+      <label for="rememberMe">Remember Me</label>
+    </div>
+
+    <button type="submit" class="submit-btn">Увійти</button>
+  </form>
+
+  <div id="success-message" class="success-alert"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
