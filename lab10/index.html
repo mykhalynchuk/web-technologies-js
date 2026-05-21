@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends Search SPA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="auth-section" class="container active">
+  <div class="auth-card" style="max-width: 600px;">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="login">Увійти</button>
+      <button class="tab-btn" data-tab="signup">Реєстрація</button>
+    </div>
+
+    <form id="login-form" class="form-content active">
+      <h2>З поверненням!</h2>
+      <div class="form-group">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Введіть юзернейм">
+        <small class="error-msg">Error message</small>
+      </div>
+      <div class="form-group password-group">
+        <label for="loginPassword">Password</label>
+        <div class="input-wrapper">
+          <input type="password" id="loginPassword" placeholder="Введіть пароль">
+          <button type="button" class="toggle-password" onclick="togglePassword('loginPassword')">👁️</button>
+        </div>
+        <small class="error-msg">Error message</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Увійти</button>
+    </form>
+
+    <form id="signup-form" class="form-content">
+      <h2>Створити акаунт</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" placeholder="Mark">
+          <small class="error-msg">Error message</small>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" placeholder="Otto">
+          <small class="error-msg">Error message</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" placeholder="example@mail.com">
+        <small class="error-msg">Error message</small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group password-group">
+          <label for="regPassword">Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="regPassword" placeholder="Пароль">
+            <button type="button" class="toggle-password" onclick="togglePassword('regPassword')">👁️</button>
+          </div>
+          <small class="error-msg">Error message</small>
+        </div>
+        <div class="form-group password-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-wrapper">
+            <input type="password" id="confirmPassword" placeholder="Повторіть">
+            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</button>
+          </div>
+          <small class="error-msg">Error message</small>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" placeholder="+380...">
+          <small class="error-msg">Error message</small>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date Birth</label>
+          <input type="date" id="dob">
+          <small class="error-msg">Error message</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Sex</label>
+        <div class="radio-group">
+          <input type="radio" id="male" name="sex" value="male"> <label for="male">Male</label>
+          <input type="radio" id="female" name="sex" value="female"> <label for="female">Female</label>
+        </div>
+        <small class="error-msg" id="sexError">Оберіть стать</small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select id="country">
+            <option value="">Оберіть країну...</option>
+            <option value="Ukraine">Україна</option>
+            <option value="Poland">Польща</option>
+          </select>
+          <small class="error-msg">Error message</small>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <select id="city" disabled>
+            <option value="">Спочатку оберіть країну</option>
+          </select>
+          <small class="error-msg">Error message</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Зареєструватися</button>
+    </form>
+  </div>
+</div>
+
+<div id="app-section" class="container">
+  <header class="app-header">
+    <div class="logo">👥 FindFriends</div>
+    <button id="logout-btn" class="btn btn-danger">Вийти</button>
+  </header>
+
+  <div class="app-grid">
+    <aside class="sidebar card">
+      <h3>Фільтри та Сортування</h3>
+
+      <div class="filter-group">
+        <label>🔍 Пошук (Ім'я, Email, Місто)</label>
+        <input type="text" id="search-input" placeholder="Введіть запит...">
+      </div>
+
+      <div class="filter-group">
+        <label>🔽 Сортувати за</label>
+        <select id="sort-select">
+          <option value="default">За замовчуванням</option>
+          <option value="name-asc">Ім'я (A-Z)</option>
+          <option value="name-desc">Ім'я (Z-A)</option>
+          <option value="age-asc">Вік (від наймолодших)</option>
+          <option value="age-desc">Вік (від найстарших)</option>
+          <option value="reg-desc">Нові користувачі</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>🎂 Рік народження (точний)</label>
+        <input type="number" id="year-filter" placeholder="Наприклад: 1995">
+      </div>
+
+      <div class="filter-group">
+        <label>⏳ Максимальний вік: <span id="age-val">100</span></label>
+        <input type="range" id="age-filter" min="0" max="100" value="100">
+      </div>
+
+      <div class="filter-group">
+        <label>🚻 Стать</label>
+        <div class="radio-group-sidebar">
+          <label><input type="radio" name="gender" value="all" checked> Всі</label>
+          <label><input type="radio" name="gender" value="male"> Чоловіки</label>
+          <label><input type="radio" name="gender" value="female"> Жінки</label>
+        </div>
+      </div>
+
+      <button id="reset-filters" class="btn btn-outline w-100">Скинути фільтри</button>
+    </aside>
+
+    <main class="main-content">
+      <div id="notification-area" class="notification"></div>
+
+      <div class="pagination-info card">
+        Активні завантаженні сторінки: <strong id="loaded-pages-indicator">1</strong>
+      </div>
+
+      <div id="users-grid" class="cards-layout">
+      </div>
+
+      <div id="loader" class="loader">
+        <div class="spinner"></div> Завантаження...
+      </div>
+
+      <div id="scroll-trigger" style="height: 20px; width: 100%;"></div>
+    </main>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
